@@ -1,3 +1,7 @@
+// keep track of events to make sure we don't fire the same transaction
+// event twice when building up the transaction history
+var eventDict = {};
+
 App = {
     web3Provider: null,
     contracts: {},
@@ -16,11 +20,16 @@ App = {
     distributorID: "0x0000000000000000000000000000000000000000",
     retailerID: "0x0000000000000000000000000000000000000000",
     consumerID: "0x0000000000000000000000000000000000000000",
+    doOnce: true,
 
     init: async function () {
         App.readForm();
         /// Setup access to blockchain
-        return await App.initWeb3();
+        if (App.doOnce)
+        {
+            await App.initWeb3();
+        }
+        //return await App.initWeb3();
     },
 
     readForm: function () {
@@ -38,21 +47,24 @@ App = {
         App.retailerID = $("#retailerID").val();
         App.consumerID = $("#consumerID").val();
 
-        console.log(
-            App.sku,
-            App.upc,
-            App.ownerID, 
-            App.originFarmerID, 
-            App.originFarmName, 
-            App.originFarmInformation, 
-            App.originFarmLatitude, 
-            App.originFarmLongitude, 
-            App.productNotes, 
-            App.productPrice, 
-            App.distributorID, 
-            App.retailerID, 
-            App.consumerID
-        );
+        //if (App.doOnce)
+        //{
+            console.log(
+                App.sku,
+                App.upc,
+                App.ownerID, 
+                App.originFarmerID, 
+                App.originFarmName, 
+                App.originFarmInformation, 
+                App.originFarmLatitude, 
+                App.originFarmLongitude, 
+                App.productNotes, 
+                App.productPrice, 
+                App.distributorID, 
+                App.retailerID, 
+                App.consumerID
+            );
+        //}
     },
 
     initWeb3: async function () {
@@ -78,8 +90,9 @@ App = {
         }
 
         App.getMetaskAccountID();
+        App.initSupplyChain();
 
-        return App.initSupplyChain();
+        return App.init();
     },
 
     getMetaskAccountID: function () {
@@ -91,15 +104,20 @@ App = {
                 console.log('Error:',err);
                 return;
             }
-            console.log('getMetaskID:',res);
-            App.metamaskAccountID = res[0];
 
+            if (App.doOnce)
+            {
+                console.log('getMetaskID:',res);
+                App.doOnce = false;
+            }
+            App.metamaskAccountID = res[0];
         })
     },
 
     initSupplyChain: function () {
         /// Source the truffle compiled smart contracts
-        var jsonSupplyChain='../../build/contracts/SupplyChain.json';
+        //var jsonSupplyChain='../../build/contracts/SupplyChain.json';
+        var jsonSupplyChain='./build/contracts/SupplyChain.json';
         
         /// JSONfy the smart contracts
         $.getJSON(jsonSupplyChain, function(data) {
@@ -112,19 +130,27 @@ App = {
             App.fetchItemBufferTwo();
             App.fetchEvents();
 
+            console.log("Supply Chain:");
+            console.log(App.contracts.SupplyChain);
+
         });
 
         return App.bindEvents();
     },
 
     bindEvents: function() {
-        $(document).on('click', App.handleButtonClick);
+        // avoid double click events
+        $(document).unbind('click').on('click', App.handleButtonClick);
     },
 
     handleButtonClick: async function(event) {
         event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
 
         App.getMetaskAccountID();
+        // update form
+        App.readForm();
 
         var processId = parseInt($(event.target).data('id'));
         console.log('processId',processId);
@@ -234,7 +260,7 @@ App = {
         var processId = parseInt($(event.target).data('id'));
 
         App.contracts.SupplyChain.deployed().then(function(instance) {
-            const walletValue = web3.toWei(3, "ether");
+            const walletValue = web3.toWei(App.productPrice, "ether");
             return instance.buyItem(App.upc, {from: App.metamaskAccountID, value: walletValue});
         }).then(function(result) {
             $("#ftc-item").text(result);
@@ -287,7 +313,7 @@ App = {
     },
 
     fetchItemBufferOne: function () {
-    ///   event.preventDefault();
+       event.preventDefault();
     ///    var processId = parseInt($(event.target).data('id'));
         App.upc = $('#upc').val();
         console.log('upc',App.upc);
@@ -303,15 +329,17 @@ App = {
     },
 
     fetchItemBufferTwo: function () {
-    ///    event.preventDefault();
-    ///    var processId = parseInt($(event.target).data('id'));
+        event.preventDefault();
+        var processId = parseInt($(event.target).data('id'));
                         
         App.contracts.SupplyChain.deployed().then(function(instance) {
           return instance.fetchItemBufferTwo.call(App.upc);
         }).then(function(result) {
           $("#ftc-item").text(result);
+          console.log("setting text");
           console.log('fetchItemBufferTwo', result);
         }).catch(function(err) {
+          console.log("setting error");
           console.log(err.message);
         });
     },
@@ -327,9 +355,13 @@ App = {
         }
 
         App.contracts.SupplyChain.deployed().then(function(instance) {
-        var events = instance.allEvents(function(err, log){
-          if (!err)
+        var events = instance.allEvents({fromBlock:'latest'}, function(err, log){
+          if (!err && eventDict[log.transactionHash] == undefined)
+          {
+            console.log("log.transactionHash: " + log.transactionHash);
             $("#ftc-events").append('<li>' + log.event + ' - ' + log.transactionHash + '</li>');
+            eventDict[log.transactionHash] = log.event;
+          }
         });
         }).catch(function(err) {
           console.log(err.message);
