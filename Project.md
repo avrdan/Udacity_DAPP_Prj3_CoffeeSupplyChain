@@ -11,8 +11,7 @@ Therefore:
 ## Contract Address
 
 Supply Chain contract address:
-https://ropsten.etherscan.io/address/0xeb1b432d793a0b55e7e0089d2fc2937334523631
-
+https://ropsten.etherscan.io/address/0x1b8256c9944480579A36306841E00B29D226c709
 Please see the more detailed section below of the migration
 to the Ropsten network. 
 
@@ -69,7 +68,7 @@ Starting migrations...
 ======================
 > Network name:    'ropsten'
 > Network id:      3
-> Block gas limit: 0x7a121d
+> Block gas limit: 0x7a1200
 
 
 1_initial_migration.js
@@ -77,13 +76,13 @@ Starting migrations...
 
    Replacing 'Migrations'
    ----------------------
-   > transaction hash:    0xf887f8c1e5e8718a03829a363a3567c241463afb85aa1d928761013a38952fc1
-   > Blocks: 2            Seconds: 8
-   > contract address:    0xfaAd56e8be34fCe16b4Ad2CE58EE32D08cD4daBE
-   > block number:        9184785
-   > block timestamp:     1606949556
+   > transaction hash:    0xa7bddd9bc3921d92ccf8fa2f7bd715385eae5916431e10e3a92500681e74023d
+   > Blocks: 0            Seconds: 40
+   > contract address:    0x5bAc980F7820A989fA561C598d8a4F87181Ac570
+   > block number:        9191872
+   > block timestamp:     1607036029
    > account:             0x878c2B8b7F06fB0aF999A3FC96CBeC7Aa0580fb0
-   > balance:             1.600030393
+   > balance:             1.527104913
    > gas used:            225225
    > gas price:           20 gwei
    > value sent:          0 ETH
@@ -101,13 +100,13 @@ Starting migrations...
 
    Replacing 'FarmerRole'
    ----------------------
-   > transaction hash:    0x7ff44d73ea5727b080416758a3691205d7e5960a3df26e0a791b45ee30c807aa
-   > Blocks: 0            Seconds: 0
-   > contract address:    0xF3F020Cd92A585e3534579D2c25A305dd2eF7e1D
-   > block number:        9184791
-   > block timestamp:     1606949586
+   > transaction hash:    0xed3390f9269c54a2f50da6e939e5edd56ef6755f66e2838151b106b87268828d
+   > Blocks: 0            Seconds: 8
+   > contract address:    0x8dc16bDe66a31fCC9016e467484f1347e9cC2C9E
+   > block number:        9191875
+   > block timestamp:     1607036107
    > account:             0x878c2B8b7F06fB0aF999A3FC96CBeC7Aa0580fb0
-   > balance:             1.593061453
+   > balance:             1.520135973
    > gas used:            306084
    > gas price:           20 gwei
    > value sent:          0 ETH
@@ -116,13 +115,13 @@ Starting migrations...
 
    Replacing 'DistributorRole'
    ---------------------------
-   > transaction hash:    0x8fdc691069cc7871d3c0906301b7fb709485cfebc11b9f88670d096bd54a8473
-   > Blocks: 1            Seconds: 12
-   > contract address:    0x7C1b88606E02689c64a8f39AbDF3db20e30C55dD
-   > block number:        9184792
-   > block timestamp:     1606949588
+   > transaction hash:    0xd0a1ae997870bfc47f095b07e83b09440a12bc7c272b2fcef131c3f45c40796f
+   > Blocks: 0            Seconds: 36
+   > contract address:    0x420cbAB4B4fC0F18d6d9aB95446B6B92f733362F
+   > block number:        9191876
+   > block timestamp:     1607036119
    > account:             0x878c2B8b7F06fB0aF999A3FC96CBeC7Aa0580fb0
-   > balance:             1.586940013
+   > balance:             1.514014533
    > gas used:            306072
    > gas price:           20 gwei
    > value sent:          0 ETH
@@ -131,13 +130,13 @@ Starting migrations...
 
    Replacing 'RetailerRole'
    ------------------------
-   > transaction hash:    0x26d4a9f422f6424632a432e69fcb79b2ce4c9adafa82e257f3c10d2e228843a8
-   > Blocks: 1            Seconds: 4
-   > contract address:    0x62bD7907264033DE6266f03CcEE36c9E214147fC
-   > block number:        9184793
-   > block timestamp:     1606949603
+   > transaction hash:    0x392c306a88556f37640c19c1cf9d2a7027ce945e387cb87365b83f1c906ceb20
+   > Blocks: 0            Seconds: 8
+   > contract address:    0x32FFD89512756786D872786d0D51a8b11042A9Ca
+   > block number:        9191877
+   > block timestamp:     1607036162
    > account:             0x878c2B8b7F06fB0aF999A3FC96CBeC7Aa0580fb0
-   > balance:             1.580818333
+   > balance:             1.507892853
    > gas used:            306084
    > gas price:           20 gwei
    > value sent:          0 ETH
@@ -146,13 +145,13 @@ Starting migrations...
 
    Replacing 'ConsumerRole'
    ------------------------
-   > transaction hash:    0x0a055b6a373d80c51df58145f1591d52bbae3091022b21d69c570ebbf65003cb
-   > Blocks: 1            Seconds: 8
-   > contract address:    0x2f241BE597D4fD355cb4FDb1F6FA684FCdbec042
-   > block number:        9184796
-   > block timestamp:     1606949619
+   > transaction hash:    0x21cbc5a38581adb2b71c2b139a29f7c95cff68d7085e07617e88f9a68d0f8659
+   > Blocks: 1            Seconds: 40
+   > contract address:    0x625F9386BFEB7f7747bFD7A1ddb15ed2e521F114
+   > block number:        9191880
+   > block timestamp:     1607036199
    > account:             0x878c2B8b7F06fB0aF999A3FC96CBeC7Aa0580fb0
-   > balance:             1.574696653
+   > balance:             1.501771173
    > gas used:            306084
    > gas price:           20 gwei
    > value sent:          0 ETH
@@ -161,29 +160,29 @@ Starting migrations...
 
    Replacing 'SupplyChain'
    -----------------------
-   > transaction hash:    0xdfb58747a5ee950858d751c3483bb771eda941cd21bfc2544428110da1bad3e9
-   > Blocks: 0            Seconds: 16
-   > contract address:    0xeb1B432D793A0b55E7E0089d2fc2937334523631
-   > block number:        9184797
-   > block timestamp:     1606949626
+   > transaction hash:    0xca3cd73809641a71e86ccb83134f4c1a40cbd7d72a9877dd6b4514912d9279c0
+   > Blocks: 1            Seconds: 40
+   > contract address:    0x1b8256c9944480579A36306841E00B29D226c709
+   > block number:        9191883
+   > block timestamp:     1607036256
    > account:             0x878c2B8b7F06fB0aF999A3FC96CBeC7Aa0580fb0
-   > balance:             1.532156673
-   > gas used:            2126999
+   > balance:             1.440511473
+   > gas used:            3062985
    > gas price:           20 gwei
    > value sent:          0 ETH
-   > total cost:          0.04253998 ETH
+   > total cost:          0.0612597 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.06702646 ETH
+   > Total cost:          0.08574618 ETH
 
 
 Summary
 =======
 > Total deployments:   6
-> Final cost:          0.07153096 ETH
+> Final cost:          0.09025068 ETH
 ```
 
 ## Tracking the Coffee Supply Chain through the Web Interface
@@ -221,7 +220,14 @@ Account 9: *0xa0c573D7448d5fEaF0ED59286f941D8c04599C4E*
 <br>
 Account 10: *0x3ef782988Af42b9e1a9346F29D1396A16c5Ec943*
 
+<hr>
 
+**Note**: did not redo this test after the ownership roles were fixed. Calls would have to be made for each of the addreses above, respectively:
+      <br><br>
+      *addFarmer*, *addDistributor*, *addRetailer*, *addConsumer*
+      <br><br>
+      This can be done manually using the browser Console.
+<hr>
 ## Built With
 
 * [Ethereum](https://www.ethereum.org/) - Ethereum is a decentralized platform that runs smart contracts

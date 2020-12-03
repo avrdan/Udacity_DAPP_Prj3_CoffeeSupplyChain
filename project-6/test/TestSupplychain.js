@@ -56,6 +56,7 @@ contract('SupplyChain', function(accounts) {
         })*/
 
         // Mark an item as Harvested by calling function harvestItem()
+        await supplyChain.addFarmer(originFarmerID);
         var result = await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
         //console.log(result);
         assert.equal(result.logs[0].event, "Harvested");
@@ -181,6 +182,7 @@ contract('SupplyChain', function(accounts) {
         // Watch the emitted event Sold()
 
         // Mark an item as Sold by calling function buyItem()
+        await supplyChain.addDistributor(distributorID);
         var result = await supplyChain.buyItem(upc, {from: distributorID, value: productPrice});
         //console.log(result);
         assert.equal(result.logs[0].event, "Sold");
@@ -250,6 +252,7 @@ contract('SupplyChain', function(accounts) {
         // Watch the emitted event Received()
 
         // Mark an item as Sold by calling function receiveItem()
+        await supplyChain.addRetailer(retailerID);
         var result = await supplyChain.receiveItem(upc, {from: retailerID});
         assert.equal(result.logs[0].event, "Received");
         
@@ -286,6 +289,7 @@ contract('SupplyChain', function(accounts) {
         
 
         // Mark an item as Sold by calling function purchaseItem()
+        await supplyChain.addConsumer(consumerID);
         var result = await supplyChain.purchaseItem(upc, {from: consumerID});
         assert.equal(result.logs[0].event, "Purchased");
         

@@ -238,7 +238,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, ConsumerRole, Reta
     items[_upc].ownerID = msg.sender;
     items[_upc].distributorID = msg.sender;
     items[_upc].itemState = State.Sold;
-    
+
     // Transfer money to farmer
     //items[_upc].originFarmerID.transfer(items[_upc].productPrice);
     
@@ -272,7 +272,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, ConsumerRole, Reta
     items[_upc].ownerID = msg.sender;
     items[_upc].retailerID = msg.sender;
     items[_upc].itemState = State.Received;
-    
+
     // Emit the appropriate event
     emit Received(_upc);
   }
@@ -288,7 +288,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, ConsumerRole, Reta
     items[_upc].ownerID = msg.sender;
     items[_upc].consumerID = msg.sender;
     items[_upc].itemState = State.Purchased;
-    
+
     // Emit the appropriate event
     emit Purchased(_upc);
   }
